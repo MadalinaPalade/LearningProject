@@ -21,6 +21,11 @@ public class UserService implements UserDetailsService {
     @Autowired
     private PasswordEncoder encoder;
 
+    public UserService(UserRepository userRepository, PasswordEncoder encoder){
+        this.repository = userRepository;
+        this.encoder= encoder;
+    }
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 

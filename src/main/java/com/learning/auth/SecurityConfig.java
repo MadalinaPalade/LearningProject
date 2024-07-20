@@ -1,5 +1,6 @@
 package com.learning.auth;
 
+import com.learning.repository.UserRepository;
 import com.learning.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -26,9 +27,15 @@ public class SecurityConfig {
     @Autowired
     private AuthFilter authFilter;
 
+    @Autowired
+    private UserRepository repository;
+
+    @Autowired
+    private PasswordEncoder encoder;
+
     @Bean
     public UserDetailsService userDetailsService() {
-        return new UserService();
+        return new UserService(repository, encoder);
     }
 
     // Configuring HttpSecurity
